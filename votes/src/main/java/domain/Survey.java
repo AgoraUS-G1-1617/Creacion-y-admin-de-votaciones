@@ -72,7 +72,7 @@ public class Survey extends DomainEntity implements Serializable{
 		this.description = description;
 	}
 	
-	@DateTimeFormat(pattern="yyyy/MM/dd")
+	@DateTimeFormat(pattern="MM-dd-yyyy")
 	public LocalDate getStartDate() {
 				return startDate;
 	}
@@ -82,7 +82,7 @@ public class Survey extends DomainEntity implements Serializable{
 		}
 		this.startDate = startDate;
 	}
-	@DateTimeFormat(pattern="yyyy/MM/dd")
+	@DateTimeFormat(pattern="MM-dd-yyyy")
 	public LocalDate getEndDate() {
 		return endDate;
 	}
@@ -100,9 +100,6 @@ public class Survey extends DomainEntity implements Serializable{
 	public void setCensus(Integer census) {
 		this.census = census;
 	}
-
-
-
 
 	//Relationships
 	private Collection<Question>questions;
