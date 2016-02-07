@@ -31,11 +31,67 @@ import domain.Survey;
 @RequestMapping("/vote")
 public class SurveyController {
 
-	// Servicios
+	// Services
 	@Autowired
 	private SurveyService surveyService;
 
-	// Métodos
+
+
+	@RequestMapping(value = "/getcookies", method = RequestMethod.GET)
+	public @ResponseBody String cookie(@CookieValue("user") String user,
+			@CookieValue("token") String token) {
+		return "{\"user\":\"" + user + "\", \"token\":\"" + token + "\"}";
+	}
+
+	// Método que devuelve la lista de votaciones creadas para editarlas.
+	// Relación con CREACION/ADMINISTRACION DE CENSO.
+	@RequestMapping(value = "/mine", method = RequestMethod.GET)
+	public Collection<Survey> findAllSurveyByCreator(
+			@CookieValue("user") String user, @CookieValue("token") String token) 
+			throws JsonParseException, JsonMappingException, IOException{
+		String creator = user;
+		CheckToken isValid = new CheckToken();
+		ObjectMapper checkToken = new ObjectMapper();
+		isValid = checkToken.readValue(new URL(
+				"http://localhost/auth/api/checkToken?token=" + token),
+				domain.CheckToken.class);
+		Assert.isTrue(isValid.getValid());
+		Collection<Survey> res = surveyService.getAllCreatedSurveys(creator);
+		return res;
+	}
+
+	// Método que devuelve la lista de votaciones finalizadas. Relación con
+	// VISUALIZACION.
+	@RequestMapping(value = "/finishedSurveys", method = RequestMethod.GET)
+	public Collection<Survey> findAllfinishedSurveys() {
+		Collection<Survey> res = surveyService.getAllFinishedSurveys();
+		return res;
+	}
+	
+	// Método que devuelve la lista completa de finalizadas. Relación con
+	// VISUALIZACION.
+	@RequestMapping(value = "/allSurveys", method = RequestMethod.GET)
+	public Collection<Survey> findAllSurveys() {
+		Collection<Survey> res = surveyService.findAll();
+		return res;
+	}
+
+	// Método que borra una votación tras comprobar que no tiene censo
+	// relacionado.
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public void delete(@RequestParam int id) {
+		surveyService.delete(id);
+	}
+
+	// Método devuelve una survey para realizar una votación. Relación con
+	// CABINA DE VOTACION
+	@RequestMapping(value = "/survey", method = RequestMethod.GET)
+	public Survey getSurvey(@RequestParam int id) {
+		Survey s = surveyService.findOne(id);
+		return s;
+	}
+	
+	
 
 	// Método para guardar la votación creada.
 	@RequestMapping(value = "/save", method = RequestMethod.POST, headers = "Content-Type=application/json")
@@ -66,60 +122,6 @@ public class SurveyController {
 			JsonMappingException, IOException {
 		
 		surveyService.addCensus(surveyId, census);
-	}
-
-	@RequestMapping(value = "/getcookies", method = RequestMethod.GET)
-	public @ResponseBody String cookie(@CookieValue("user") String user,
-			@CookieValue("token") String token) {
-		return "{\"user\":\"" + user + "\", \"token\":\"" + token + "\"}";
-	}
-
-	// Método que devuelve la lista de votaciones creadas para editarlas.
-	// Relación con CREACION/ADMINISTRACION DE CENSO.
-	@RequestMapping(value = "/mine", method = RequestMethod.GET)
-	public Collection<Survey> findAllSurveyByCreator(
-			@CookieValue("user") String user, @CookieValue("token") String token) 
-			throws JsonParseException, JsonMappingException, IOException{
-		String creator = user;
-		CheckToken isValid = new CheckToken();
-		ObjectMapper checkToken = new ObjectMapper();
-		isValid = checkToken.readValue(new URL(
-				"http://localhost/auth/api/checkToken?token=" + token),
-				domain.CheckToken.class);
-		Assert.isTrue(isValid.getValid());
-		Collection<Survey> res = surveyService.allCreatedSurveys(creator);
-		return res;
-	}
-
-	// Método que devuelve la lista de votaciones finalizadas. Relación con
-	// VISUALIZACION.
-	@RequestMapping(value = "/finishedSurveys", method = RequestMethod.GET)
-	public Collection<Survey> findAllfinishedSurveys() {
-		Collection<Survey> res = surveyService.allFinishedSurveys();
-		return res;
-	}
-	
-	// Método que devuelve la lista completa de finalizadas. Relación con
-	// VISUALIZACION.
-	@RequestMapping(value = "/allSurveys", method = RequestMethod.GET)
-	public Collection<Survey> findAllSurveys() {
-		Collection<Survey> res = surveyService.findAll();
-		return res;
-	}
-
-	// Método que borra una votación tras comprobar que no tiene censo
-	// relacionado.
-	@RequestMapping(value = "/delete", method = RequestMethod.GET)
-	public void delete(@RequestParam int id) {
-		surveyService.delete(id);
-	}
-
-	// Método devuelve una survey para realizar una votación. Relación con
-	// CABINA DE VOTACION
-	@RequestMapping(value = "/survey", method = RequestMethod.GET)
-	public Survey getSurvey(@RequestParam int id) {
-		Survey s = surveyService.findOne(id);
-		return s;
 	}
 
 }

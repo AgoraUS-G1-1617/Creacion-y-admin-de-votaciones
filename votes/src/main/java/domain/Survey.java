@@ -32,6 +32,7 @@ public class Survey extends DomainEntity implements Serializable{
 	private LocalDate endDate;
 	private Integer census;
 	
+	//Constructors
 	public Survey() {
 		super();
 		

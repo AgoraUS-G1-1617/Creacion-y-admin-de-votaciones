@@ -16,7 +16,7 @@ import repositories.SurveyRepository;
 @Service
 public class SurveyService {
 
-	//Repositories
+	//Repository
 	@Autowired
 	private SurveyRepository surveyRepository;
 	
@@ -57,15 +57,15 @@ public class SurveyService {
 	}
 	
 	//Método de interacción con el subsistema de Visualización
-	public List<Survey>allFinishedSurveys(){
+	public List<Survey>getAllFinishedSurveys(){
 		
 		LocalDate now = LocalDate.now();
-		List<Survey>res = surveyRepository.allFinishedSurveys(now);
+		List<Survey>res = surveyRepository.getAllFinishedSurveys(now);
 		return res;
 	}
 	
-	public List<Survey>allCreatedSurveys(String usernameCreator){
-		List<Survey>res = surveyRepository.allCreatedSurveys(usernameCreator);
+	public List<Survey>getAllCreatedSurveys(String usernameCreator){
+		List<Survey>res = surveyRepository.getAllCreatedSurveys(usernameCreator);
 		return res;
 	}
 	

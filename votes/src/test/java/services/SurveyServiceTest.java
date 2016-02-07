@@ -32,7 +32,7 @@ public class SurveyServiceTest extends AbstractTest{
 	
 
 	@Test
-	public void saveCreateSurvey(){
+	public void saveCreateSurveyTest(){
 		
 		Survey s = new Survey();
 		
@@ -61,7 +61,7 @@ public class SurveyServiceTest extends AbstractTest{
 
 	
 	@Test
-	public void allFinishedSurveysTest(){
+	public void getAllFinishedSurveysTest(){
 		
 		Survey s = new Survey();
 		Collection<Question> questions = new LinkedList<>();
@@ -95,14 +95,14 @@ public class SurveyServiceTest extends AbstractTest{
 			System.out.println(a);
 		}
 		
-		List<Survey> res = surveyService.allFinishedSurveys();
+		List<Survey> res = surveyService.getAllFinishedSurveys();
 		System.out.println("====== Mostrando solo la prueba terminada ======");
 		System.out.println(res);
 		
 	}
 	
 	@Test
-	public void testAllCreatedSurveys(){
+	public void getAllCreatedSurveysTest(){
 		
 		Survey s = new Survey();
 		Collection<Question> questions = new LinkedList<>();
@@ -140,14 +140,14 @@ public class SurveyServiceTest extends AbstractTest{
 			System.out.println(a);
 		}
 		
-		List<Survey> res = surveyService.allCreatedSurveys(usuario2);
+		List<Survey> res = surveyService.getAllCreatedSurveys(usuario2);
 		System.out.println("====== Mostrando Surveys filtradas por usernameCreator ======");
 		System.out.println(res);
 		
 	}
 	
 	@Test
-	public void testDelete(){
+	public void deleteTest(){
 	
 		Survey s = new Survey();
 		Collection<Question> questions = new LinkedList<>();
@@ -195,7 +195,7 @@ public class SurveyServiceTest extends AbstractTest{
 	}
 	
 	@Test
-	public void testPosible(){
+	public void posibleTest(){
 		
 		Survey s = new Survey();
 		Collection<Question> questions = new LinkedList<>();
