@@ -47,14 +47,15 @@
 			<div class="col-xs-10">
 				<form role="form" name="form" ng-controller="createController" novalidate>
 					<div class="form-group">
-						<label>Titulo:</label>
+						<label>Título:</label>
 						<input class="form-control" name="sTitle" type="text" ng-model="survey.title" name="title" ng-minlength="5" ng-maxlength="100" required>
-						<span ng-show="form.sTitle.$error.minlength || form.sTitle.$error.maxlength" style="color:red;font-style: oblique;">El tÃ­tulo debe tener entre 5 y 100 caracteres.</span>
+						<span ng-show="form.sTitle.$error.minlength || form.sTitle.$error.maxlength" style="color:red;font-style: oblique;">El título debe tener entre 5 y 100 caracteres.</span>
 					</div>
 					<div class="form-group">
-						<label>Descripcion:</label>
-						<textarea class="form-control" name="sDescription" ng-model="survey.description" required></textarea>
-						<span ng-show="form.sDescription.$error.required && form.sDescription.$dirty" style="color:red;font-style: oblique;">Campo requerido</span>
+						<label>Descripción:</label>
+						<textarea class="form-control" name="sDescription" ng-model="survey.description" ng-minlength="5" ng-maxlength="150" required></textarea>
+						<span ng-show="form.sDescription.$error.required && form.sDescription.$dirty" style="color:red;font-style: oblique;">Campo requerido</span><br>
+						<span ng-show="form.sDescription.$error.minlength || form.sDescription.$error.maxlength" style="color:red;font-style: oblique;">Entre 5 y 150 caracteres</span>
 					</div>
 					<div class="form-group">	
 						<label>Fecha Inicio:</label>
@@ -64,6 +65,17 @@
 						<label>Fecha Fin:</label>
 						<input class="form-control" type="date" ng-model="survey.endDate" placeholder="MM-dd-yyyy" required/>
 					</div>
+					<div class="form-group"> 
+						<label>Categoría:</label>
+						<select class="form-control" ng-model="survey.category" required>	
+							<option value="deportes">Deportes</option>
+							<option value="musica">Música</option>
+							<option value="cine">Cine</option>
+							<option value="politica">Política</option>
+							<option value="otros">Otros</option>
+						</select>
+					</div>
+							
 					<div id="preguntas">
 						<div ng-repeat="q in qs track by $index">
 							<label>Pregunta {{$index+1}}</label>

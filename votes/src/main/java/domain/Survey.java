@@ -26,7 +26,7 @@ public class Survey extends DomainEntity implements Serializable{
 	//Attributes
 	private String title;
 	private String description;
-	private String categoria;
+	private String category;
 	private LocalDate startDate;
 	private LocalDate endDate;
 	private Integer census;
@@ -38,7 +38,7 @@ public class Survey extends DomainEntity implements Serializable{
 		questions = new LinkedList<Question>();
 	}
 	
-	public Survey(String title, String description, LocalDate startDate,
+	public Survey(String title, String description, String category, LocalDate startDate,
 			LocalDate endDate, Integer census) {
 		super();
 		
@@ -46,6 +46,7 @@ public class Survey extends DomainEntity implements Serializable{
 		
 		this.title = title;
 		this.description = description;
+		this.category = category;
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.census = census;
@@ -75,12 +76,12 @@ public class Survey extends DomainEntity implements Serializable{
 	
 	@NotBlank
 	@Length(min=3, max=15, message="The field must be between 3 and 15 characters")
-	public String getCategoria() {
-		return categoria;
+	public String getCategory() {
+		return category;
 	}
 
-	public void setCategoria(String categoria) {
-		this.categoria = categoria;
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
 	@DateTimeFormat(pattern="MM-dd-yyyy")
