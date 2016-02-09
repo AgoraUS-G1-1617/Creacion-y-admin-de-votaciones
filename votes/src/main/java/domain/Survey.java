@@ -21,13 +21,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Access(AccessType.PROPERTY)
 public class Survey extends DomainEntity implements Serializable{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 749544364605664829L;
+	
 	//Attributes
 	private String title;
 	private String description;
+	private String categoria;
 	private LocalDate startDate;
 	private LocalDate endDate;
 	private Integer census;
@@ -57,7 +56,7 @@ public class Survey extends DomainEntity implements Serializable{
 	
 	//Methods
 	@NotBlank
-	@Length(min=5, max=100, message="The field must be between 5 and 10 characters")
+	@Length(min=5, max=15, message="The field must be between 5 and 15 characters")
 	public String getTitle() {
 		return title;
 	}
@@ -66,6 +65,7 @@ public class Survey extends DomainEntity implements Serializable{
 	}
 	
 	@NotBlank
+	@Length(min=5, max=150, message="The field must be between 5 and 150 characters")
 	public String getDescription() {
 		return description;
 	}
@@ -73,6 +73,16 @@ public class Survey extends DomainEntity implements Serializable{
 		this.description = description;
 	}
 	
+	@NotBlank
+	@Length(min=3, max=15, message="The field must be between 3 and 15 characters")
+	public String getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(String categoria) {
+		this.categoria = categoria;
+	}
+
 	@DateTimeFormat(pattern="MM-dd-yyyy")
 	public LocalDate getStartDate() {
 				return startDate;
