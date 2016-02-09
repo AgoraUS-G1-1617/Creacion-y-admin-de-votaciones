@@ -45,6 +45,7 @@ public class SurveyServiceTest extends AbstractTest{
 		s.setCensus(2);
 		s.setDescription("Prueba");
 		s.setTitle("Titulo prueba");
+		s.setCategory("Deportes");
 		s.setStartDate(LocalDate.now());
 		s.setEndDate(LocalDate.now());
 		s.setQuestions(questions);
@@ -71,6 +72,7 @@ public class SurveyServiceTest extends AbstractTest{
 		s.setCensus(2);
 		s.setDescription("Prueba");
 		s.setTitle("Titulo prueba");
+		s.setCategory("Deportes");
 		s.setStartDate(LocalDate.now());
 		s.setEndDate(LocalDate.now());
 		s.setQuestions(questions);
@@ -83,8 +85,9 @@ public class SurveyServiceTest extends AbstractTest{
 		s2.setCensus(5);
 		s2.setDescription("Prueba2");
 		s2.setTitle("Titulo prueba2");
+		s2.setCategory("Deportes");
 		s2.setStartDate(LocalDate.now());
-		s2.setEndDate(LocalDate.of(2020, 10, 15));
+		s2.setEndDate(LocalDate.of(2016, 10, 15));
 		s2.setQuestions(questions2);
 		
 		surveyService.save(s);
@@ -113,6 +116,7 @@ public class SurveyServiceTest extends AbstractTest{
 		s.setCensus(2);
 		s.setDescription("Prueba");
 		s.setTitle("Titulo prueba");
+		s.setCategory("Deportes");
 		s.setStartDate(LocalDate.now());
 		s.setEndDate(LocalDate.now());
 		s.setQuestions(questions);
@@ -127,8 +131,9 @@ public class SurveyServiceTest extends AbstractTest{
 		s2.setCensus(5);
 		s2.setDescription("Prueba2");
 		s2.setTitle("Titulo prueba2");
+		s2.setCategory("Deportes");
 		s2.setStartDate(LocalDate.now());
-		s2.setEndDate(LocalDate.of(2020, 10, 15));
+		s2.setEndDate(LocalDate.of(2016, 10, 15));
 		s2.setQuestions(questions2);
 		s.setUsernameCreator(usuario2);
 		
@@ -158,6 +163,7 @@ public class SurveyServiceTest extends AbstractTest{
 		s.setCensus(2);
 		s.setDescription("Prueba");
 		s.setTitle("Titulo prueba");
+		s.setCategory("Deportes");
 		s.setStartDate(LocalDate.now());
 		s.setEndDate(LocalDate.now());
 		s.setQuestions(questions);
@@ -172,12 +178,13 @@ public class SurveyServiceTest extends AbstractTest{
 		s2.setCensus(5);
 		s2.setDescription("Prueba2");
 		s2.setTitle("Titulo prueba2");
+		s2.setCategory("Deportes");
 		s2.setStartDate(LocalDate.now());
-		s2.setEndDate(LocalDate.of(2020, 10, 15));
+		s2.setEndDate(LocalDate.of(2016, 10, 15));
 		s2.setQuestions(questions2);
-		s.setUsernameCreator(usuario2);
+		s2.setUsernameCreator(usuario2);
 		
-		surveyService.save(s);
+		Integer res = this.surveyService.save(s);
 		surveyService.save(s2);
 		
 		System.out.println("====== Mostrando los surveysIDs despues de guardar ======");
@@ -185,7 +192,7 @@ public class SurveyServiceTest extends AbstractTest{
 			System.out.println(a.getId());
 		}
 		
-		surveyService.delete(17);
+		surveyService.delete(res);
 		
 		System.out.println("====== Mostrando los surveysIDs despues de borrar ======");
 		for(Survey a : surveyService.findAll()){
@@ -206,6 +213,7 @@ public class SurveyServiceTest extends AbstractTest{
 		s.setCensus(2);
 		s.setDescription("Prueba");
 		s.setTitle("Titulo prueba");
+		s.setCategory("Deportes");
 		s.setStartDate(LocalDate.now());
 		s.setEndDate(LocalDate.now());
 		s.setQuestions(questions);
@@ -220,21 +228,22 @@ public class SurveyServiceTest extends AbstractTest{
 		s2.setCensus(null);
 		s2.setDescription("Prueba2");
 		s2.setTitle("Titulo prueba2");
+		s2.setCategory("Deportes");
 		s2.setStartDate(LocalDate.now());
-		s2.setEndDate(LocalDate.of(2020, 10, 15));
+		s2.setEndDate(LocalDate.of(2016, 10, 15));
 		s2.setQuestions(questions2);
 		s.setUsernameCreator(usuario2);
 		
-		surveyService.save(s);
-		surveyService.save(s2);
+		Integer res1 = this.surveyService.save(s);
+		Integer res2 = this.surveyService.save(s2);
 		
 		System.out.println("====== Mostrando los surveys despues de guardar ======");
 		for(Survey a : surveyService.findAll()){
 			System.out.println(a.getId());
 		}
 		System.out.println("====== Mostrando si es posible añadir censo ======");
-		System.out.println(surveyService.posible(9));
-		System.out.println(surveyService.posible(11));
+		System.out.println(surveyService.posible(res1));
+		System.out.println(surveyService.posible(res2));
 	}
 	
 }

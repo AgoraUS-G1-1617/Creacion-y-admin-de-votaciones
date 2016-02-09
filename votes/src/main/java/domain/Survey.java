@@ -1,9 +1,13 @@
 package domain;
 
 import java.io.Serializable;
+import java.time.Duration;
 import java.time.LocalDate;
+import java.time.Period;
+import java.time.temporal.TemporalUnit;
 import java.util.Collection;
 import java.util.LinkedList;
+
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
@@ -15,6 +19,8 @@ import javax.persistence.OneToMany;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.joda.time.Days;
+import org.joda.time.ReadableInstant;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -157,8 +163,9 @@ public class Survey extends DomainEntity implements Serializable{
 		if(endDate.isBefore(startDate)){
 			throw new IllegalArgumentException("La fecha de fin no puede ir antes que la de inicio");
 		}
-			
-		if(startDate.plusYears(2).isAfter(endDate)){
+		
+		int daysBetween = Period.between(startDate, endDate).getDays();
+		if(daysBetween > 730){
 			throw new IllegalArgumentException("La votación no puede durar mas de 2 años");
 			
 		}
@@ -166,5 +173,5 @@ public class Survey extends DomainEntity implements Serializable{
 	}
 	
 	
-	
 }
+
