@@ -147,10 +147,19 @@ public class Survey extends DomainEntity implements Serializable{
 				+ ", census=" + census + ", questions=" + questions + "]";
 	}
 	
-	private void checkFecha(LocalDate f1, LocalDate f2){
+	private void checkFecha(LocalDate startDate, LocalDate endDate){
 		
-		if(f2.isBefore(f1)){
+		if(startDate.isBefore(LocalDate.now())){
+			throw new IllegalArgumentException("La fecha de inicio no puede ser anterior a la actual");
+		}
+		
+		if(endDate.isBefore(startDate)){
 			throw new IllegalArgumentException("La fecha de fin no puede ir antes que la de inicio");
+		}
+			
+		if(startDate.plusYears(2).isAfter(endDate)){
+			throw new IllegalArgumentException("La votación no puede durar mas de 2 años");
+			
 		}
 		
 	}
