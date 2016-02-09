@@ -1,5 +1,5 @@
-/target/
-.classpath
-.project
-.tern-project
-.settings
+votes/target/
+votes/.classpath
+votes/.project
+votes/.tern-project
+votes/.settings
