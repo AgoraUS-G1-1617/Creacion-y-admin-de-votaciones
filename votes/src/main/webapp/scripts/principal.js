@@ -1,19 +1,9 @@
-
-
-function ocultarTodo(){
-	var texto = document.querySelectorAll("#divTexto")[0];
-	var imagenes = document.querySelectorAll("#divImagenes")[0];
-	var fechaFin = document.querySelectorAll("#fechaFin")[0];
-	addClass(texto,"hidden");
-	addClass(imagenes,"hidden");
-	addClass(fechaFin,"hidden");
-}
-function actualizar_opciones(s){
-	var opcionImagen = document.querySelectorAll("#fechaFin")[0];
-	if(s.value=="si"){
-		removeClass(opcionImagen,"hidden");
+function actualizar_opciones(d){
+	var divImagen = document.querySelectorAll("#divImagenes")[0];
+	if(d.value=="Si"){
+		removeClass(divImagen,"hidden");
 	}else{
-		addClass(opcionImagen,"hidden");
+		addClass(divImagen,"hidden");
 	}
 }
 function actualiza_opcionFecha(s){

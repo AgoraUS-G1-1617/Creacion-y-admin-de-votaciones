@@ -15,7 +15,7 @@
 		<div class="row">
 			<div class="col-xs-5"></div>
 			<div class="col-xs-2">
-				<img src=""/>
+				<img src="images/logo.png" height="80%" width="80%"/>
 			</div>
 			<div class="col-xs-5"></div>
 			<br>
@@ -61,9 +61,9 @@
 							<label>Fecha Inicio:</label>
 							<input class="form-control" type="date" ng-model="survey.startDate" placeholder="yyyy-MM-dd" required/>
 						</div>
-					<div id="select" class="form-group">	
+					<div class="form-group">	
 						<label>Fecha de finalizaci&oacute;n:</label>
-						<select onchange="actualiza_opciones(this)">
+						<select onchange="actualiza_opcionFecha(this)">
 						  <option value="no">No</option>
 						  <option value="si">Si</option>
 						</select>
@@ -74,21 +74,34 @@
 						<input class="form-control" type="date" ng-model="survey.endDate" placeholder="yyyy-MM-dd"/>
 					</div>
 					<div class="form-group">
-					<label>Categoría:</label>
-					<select class="form-control" ng-model="survey.category" required>
-					<option value="deportes">Deportes</option>
-					<option value="musica">Música</option>
-					<option value="cine">Cine</option>
-					<option value="politica">Política</option>
-					<option value="otros">Otros</option>
-					</select>
-					</div>
-					<div id="selectImagen" class="form-group">	
-						<label>Incluir imagen:</label>
-						<select onchange="actualiza_opcionFecha(this)">
-						  <option value="no">No</option>
-						  <option value="si">Si</option>
+						<label>Categoría:</label>
+						<select class="form-control" ng-model="survey.category" required>
+							<option value="deportes">Deportes</option>
+							<option value="musica">Música</option>
+							<option value="cine">Cine</option>
+							<option value="politica">Política</option>
+							<option value="otros">Otros</option>
 						</select>
+					</div>
+					<div class="form-group">	
+						<label>Incluir imagen:</label>
+						<select onchange="actualizar_opciones(this)">
+						  <option value="No">No</option>
+						  <option value="Si">Si</option>
+						</select>
+					</div>
+					<div id="divImagenes" class="hidden">
+						
+						<label>Imagen:&nbsp;</label>
+						<div class="row">
+							<div><input type="file"/></div>
+						</div>
+						<br/>
+						<label>Nombre:&nbsp;</label>
+						<div class="row">
+							<input class="form-control" type="text"/>
+						</div>
+						<br/>
 					</div>
 					<div id="divTexto">
 						<div class="form-group">	
@@ -116,26 +129,7 @@
 						</div>
 						<br/>
 					</div>
-					<div id="divImagenes" class="hidden">
-						
-						<label>Imagen:&nbsp;</label>
-						<div class="row">
-							<div><input type="file"/></div>
-						</div>
-						<br/>
-						<label>Nombre:&nbsp;</label>
-						<div class="row">
-							<input class="form-control" type="text"/>
-						</div>
-						<br/>
-						<div class="col-xs-12">
-							<div class="col-xs-5"></div>
-							<div class="col-xs-2">
-								<button class="btn btn-primary" type="button" ng-click="submit(survey)" ng-disabled="form.$invalid">Enviar</button>
-							</div>
-							<div class="col-xs-5"></div>
-						</div>
-					</div>
+					
 				</form>
 			</div>
 			<div class="col-xs-1"></div>
