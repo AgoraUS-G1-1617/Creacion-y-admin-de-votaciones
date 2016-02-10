@@ -31,42 +31,11 @@ import domain.Survey;
 @RequestMapping("/vote")
 public class SurveyController {
 
-	// Servicios
+	// Services
 	@Autowired
 	private SurveyService surveyService;
 
-	// Métodos
 
-	// Método para guardar la votación creada.
-	@RequestMapping(value = "/save", method = RequestMethod.POST, headers = "Content-Type=application/json")
-	public @ResponseBody Survey save(@RequestBody String surveyJson,
-			@CookieValue("user") String user, @CookieValue("token") String token)
-			throws JsonParseException, JsonMappingException, IOException {
-		ObjectMapper mapper = new ObjectMapper();
-		Survey s = mapper.readValue(surveyJson, Survey.class);
-
-		CheckToken isValid = new CheckToken();
-		ObjectMapper checkToken = new ObjectMapper();
-		isValid = checkToken.readValue(new URL(
-				"http://localhost/auth/api/checkToken?token=" + token),
-				domain.CheckToken.class);
-		Assert.isTrue(isValid.getValid());
-		int i = surveyService.save(s);
-		Survey res = surveyService.findOne(i);
-		Authority a = new AuthorityImpl();
-		a.postKey(String.valueOf(res.getId()));
-		return res;
-	}
-
-	// Método para guardar la votación con el censo. Relación con
-	// CREACION/ADMINISTRACION DE CENSO.
-	@RequestMapping(value = "/saveCensus", method = RequestMethod.GET)
-	public @ResponseBody void saveCensus(@RequestParam Integer surveyId,
-			@RequestParam Integer census) throws JsonParseException,
-			JsonMappingException, IOException {
-		
-		surveyService.addCensus(surveyId, census);
-	}
 
 	@RequestMapping(value = "/getcookies", method = RequestMethod.GET)
 	public @ResponseBody String cookie(@CookieValue("user") String user,
@@ -87,7 +56,7 @@ public class SurveyController {
 				"http://localhost/auth/api/checkToken?token=" + token),
 				domain.CheckToken.class);
 		Assert.isTrue(isValid.getValid());
-		Collection<Survey> res = surveyService.allCreatedSurveys(creator);
+		Collection<Survey> res = surveyService.getAllCreatedSurveys(creator);
 		return res;
 	}
 
@@ -95,7 +64,7 @@ public class SurveyController {
 	// VISUALIZACION.
 	@RequestMapping(value = "/finishedSurveys", method = RequestMethod.GET)
 	public Collection<Survey> findAllfinishedSurveys() {
-		Collection<Survey> res = surveyService.allFinishedSurveys();
+		Collection<Survey> res = surveyService.getAllFinishedSurveys();
 		return res;
 	}
 	
@@ -120,6 +89,39 @@ public class SurveyController {
 	public Survey getSurvey(@RequestParam int id) {
 		Survey s = surveyService.findOne(id);
 		return s;
+	}
+	
+	
+
+	// Método para guardar la votación creada.
+	@RequestMapping(value = "/save", method = RequestMethod.POST, headers = "Content-Type=application/json")
+	public @ResponseBody Survey save(@RequestBody String surveyJson,
+			@CookieValue("user") String user, @CookieValue("token") String token)
+			throws JsonParseException, JsonMappingException, IOException {
+		ObjectMapper mapper = new ObjectMapper();
+		Survey s = mapper.readValue(surveyJson, Survey.class);
+
+		CheckToken isValid = new CheckToken();
+		ObjectMapper checkToken = new ObjectMapper();
+		isValid = checkToken.readValue(new URL(
+				"http://localhost/auth/api/checkToken?token=" + token),
+				domain.CheckToken.class);
+		Assert.isTrue(isValid.getValid());
+		int i = surveyService.save2(s);
+		Survey res = surveyService.findOne(i);
+		Authority a = new AuthorityImpl();
+		a.postKey(String.valueOf(res.getId()));
+		return res;
+	}
+
+	// Método para guardar la votación con el censo. Relación con
+	// CREACION/ADMINISTRACION DE CENSO.
+	@RequestMapping(value = "/saveCensus", method = RequestMethod.GET)
+	public @ResponseBody void saveCensus(@RequestParam Integer surveyId,
+			@RequestParam Integer census) throws JsonParseException,
+			JsonMappingException, IOException {
+		
+		surveyService.addCensus(surveyId, census);
 	}
 
 }

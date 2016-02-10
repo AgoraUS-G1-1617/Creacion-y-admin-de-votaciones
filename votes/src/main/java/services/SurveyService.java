@@ -1,10 +1,12 @@
 package services;
 
+import java.util.Date;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,7 +18,7 @@ import repositories.SurveyRepository;
 @Service
 public class SurveyService {
 
-	//Repositories
+	//Repository
 	@Autowired
 	private SurveyRepository surveyRepository;
 	
@@ -24,11 +26,18 @@ public class SurveyService {
 	@Autowired
 	private QuestionService questionService;
 	
-	@Transactional
-	public Integer save(Survey s){
+	
+	public Integer save2(Survey s){
 		Assert.notNull(s);
 		Survey s1 = surveyRepository.save(s);
 		return s1.getId();
+	}
+	
+	
+	public void save(Survey s){
+		Assert.notNull(s);
+		surveyRepository.save(s);
+	
 	}
 	
 	public Survey findOne(int id){
@@ -44,6 +53,11 @@ public class SurveyService {
 		
 		return res;
 	}
+		
+	public void delete(int id){
+		Assert.notNull(id);
+		surveyRepository.delete(id);
+	}
 	//Método de interacción con el subsistema de Creacion de Censos
 	public void addCensus(Integer s, Integer c){
 		Survey survey = findOne(s);
@@ -57,22 +71,18 @@ public class SurveyService {
 	}
 	
 	//Método de interacción con el subsistema de Visualización
-	public List<Survey>allFinishedSurveys(){
+	public List<Survey>getAllFinishedSurveys(){
 		
-		LocalDate now = LocalDate.now();
-		List<Survey>res = surveyRepository.allFinishedSurveys(now);
+		Date now = new Date();
+		List<Survey>res = surveyRepository.getAllFinishedSurveys(now);
 		return res;
 	}
 	
-	public List<Survey>allCreatedSurveys(String usernameCreator){
-		List<Survey>res = surveyRepository.allCreatedSurveys(usernameCreator);
+	public List<Survey>getAllCreatedSurveys(String usernameCreator){
+		List<Survey>res = surveyRepository.getAllCreatedSurveys(usernameCreator);
 		return res;
 	}
-	
-	public void delete(int id){
-		Assert.notNull(id);
-		surveyRepository.delete(id);
-	}
+
 	
 	public Boolean posible (int id) {
 		Assert.notNull(id);

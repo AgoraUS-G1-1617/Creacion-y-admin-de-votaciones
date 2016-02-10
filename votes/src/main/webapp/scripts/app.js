@@ -3,15 +3,15 @@ var cavApp = angular.module("cavApp",["ngRoute","cavControllers","ngCookies"])
 cavApp.config(['$routeProvider','$locationProvider', 
 function($routeProvider,$locationProvider) {
 	$routeProvider.when('/', {
-		templateUrl: 'partials/main.html',
+		templateUrl: 'views/votes/main.html',
 		controller : 'indexController'
 	}),
 	$routeProvider.when('/create', {
-		templateUrl: 'partials/form.html',
+		templateUrl: 'views/votes/form.html',
 		controller : 'createController'
 	}),
 	$routeProvider.when('/list', {
-		templateUrl: 'partials/list.html',
+		templateUrl: 'views/votes/list.html',
 		controller : 'listController'
 	});
 }]);
