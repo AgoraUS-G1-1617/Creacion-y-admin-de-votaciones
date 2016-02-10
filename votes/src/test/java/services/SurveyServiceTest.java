@@ -1,12 +1,14 @@
 //package services;
 //
-//import java.time.LocalDate;
+//import java.text.SimpleDateFormat;
 //import java.util.Collection;
+//import java.util.Date;
 //import java.util.LinkedList;
 //import java.util.List;
 //
 //import javax.transaction.Transactional;
 //
+//import org.apache.commons.lang.time.DateUtils;
 //import org.junit.Test;
 //import org.junit.runner.RunWith;
 //import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +22,7 @@
 //import utilities.AbstractTest;
 //
 //@RunWith(SpringJUnit4ClassRunner.class)
-//@ContextConfiguration(locations = { "classpath:spring/datasource.xml",
-//		"classpath:spring/config/packages.xml" })
+//@ContextConfiguration(locations = { "classpath:spring/datasource.xml", "classpath:spring/config/packages.xml" })
 //@Transactional
 //@TransactionConfiguration(defaultRollback = false)
 //public class SurveyServiceTest extends AbstractTest {
@@ -42,15 +43,13 @@
 //		s.setCensus(2);
 //		s.setDescription("Prueba");
 //		s.setTitle("Titulo prueba");
-//		s.setCategory("Deportes");
-//		s.setStartDate(LocalDate.now());
-//		s.setEndDate(LocalDate.now());
+//		s.setStartDate(new Date());
+//		s.setEndDate(new Date());
 //		s.setQuestions(questions);
 //
 //		surveyService.save(s);
 //
-//		System.out
-//				.println("====== Mostrando los surveys despues de guardar ======");
+//		System.out.println("====== Mostrando los surveys despues de guardar ======");
 //		for (Survey e : surveyService.findAll()) {
 //			System.out.println(e);
 //		}
@@ -64,13 +63,11 @@
 //		Collection<Question> questions = new LinkedList<>();
 //		Question q = new Question("Pregunta cualquiera");
 //		questions.add(q);
-//
 //		s.setCensus(2);
 //		s.setDescription("Prueba");
 //		s.setTitle("Titulo prueba");
-//		s.setCategory("Deportes");
-//		s.setStartDate(LocalDate.now());
-//		s.setEndDate(LocalDate.now());
+//		s.setStartDate(new Date());
+//		s.setEndDate(new Date());
 //		s.setQuestions(questions);
 //
 //		Survey s2 = new Survey();
@@ -81,16 +78,14 @@
 //		s2.setCensus(5);
 //		s2.setDescription("Prueba2");
 //		s2.setTitle("Titulo prueba2");
-//		s2.setCategory("Deportes");
-//		s2.setStartDate(LocalDate.now());
-//		s2.setEndDate(LocalDate.of(2016, 10, 15));
+//		s2.setStartDate(new Date());
+//		s2.setEndDate(new Date);
 //		s2.setQuestions(questions2);
 //
 //		surveyService.save(s);
 //		surveyService.save(s2);
 //
-//		System.out
-//				.println("====== Mostrando los surveys despues de guardar ======");
+//		System.out.println("====== Mostrando los surveys despues de guardar ======");
 //		for (Survey a : surveyService.findAll()) {
 //			System.out.println(a);
 //		}
@@ -102,105 +97,97 @@
 //	}
 //
 //	@Test
-//	public void getAllCreatedSurveysTest() {
+// public void getAllCreatedSurveysTest(){
 //
-//		Survey s = new Survey();
-//		Collection<Question> questions = new LinkedList<>();
-//		Question q = new Question("Pregunta cualquiera");
-//		questions.add(q);
-//		String usuario1 = "Usuario1";
+// Survey s = new Survey();
+// Collection<Question> questions = new LinkedList<>();
+// Question q = new Question("Pregunta cualquiera");
+// questions.add(q);
+// String usuario1 = "Usuario1";
 //
-//		s.setCensus(2);
-//		s.setDescription("Prueba");
-//		s.setTitle("Titulo prueba");
-//		s.setCategory("Deportes");
-//		s.setStartDate(LocalDate.now());
-//		s.setEndDate(LocalDate.now());
-//		s.setQuestions(questions);
-//		s.setUsernameCreator(usuario1);
+// s.setCensus(2);
+// s.setDescription("Prueba");
+// s.setTitle("Titulo prueba");
+// s.setStartDate(new Date());
+// s.setEndDate(new Date());
+// s.setQuestions(questions);
+// s.setUsernameCreator(usuario1);
 //
-//		Survey s2 = new Survey();
-//		Collection<Question> questions2 = new LinkedList<>();
-//		Question q2 = new Question("Pregunta cualquiera2");
-//		questions2.add(q2);
-//		String usuario2 = "Usuario2";
+// Survey s2 = new Survey();
+// Collection<Question> questions2 = new LinkedList<>();
+// Question q2 = new Question("Pregunta cualquiera2");
+// questions2.add(q2);
+// String usuario2 = "Usuario2";
 //
-//		s2.setCensus(5);
-//		s2.setDescription("Prueba2");
-//		s2.setTitle("Titulo prueba2");
-//		s2.setCategory("Deportes");
-//		s2.setStartDate(LocalDate.now());
-//		s2.setEndDate(LocalDate.of(2016, 10, 15));
-//		s2.setQuestions(questions2);
-//		s.setUsernameCreator(usuario2);
+// s2.setCensus(5);
+// s2.setDescription("Prueba2");
+// s2.setTitle("Titulo prueba2");
+// s2.setStartDate(new Date());
+// s2.setEndDate(new Date());
+// s2.setQuestions(questions2);
+// s.setUsernameCreator(usuario2);
 //
-//		surveyService.save(s);
-//		surveyService.save(s2);
+// surveyService.save(s);
+// surveyService.save(s2);
 //
-//		System.out
-//				.println("====== Mostrando los surveys despues de guardar ======");
-//		for (Survey a : surveyService.findAll()) {
-//			System.out.println(a);
-//		}
+// System.out.println("====== Mostrando los surveys despues de guardar ======");
+// for(Survey a : surveyService.findAll()){
+// System.out.println(a);
+// }
 //
-//		List<Survey> res = surveyService.getAllCreatedSurveys(usuario2);
-//		System.out
-//				.println("====== Mostrando Surveys filtradas por usernameCreator ======");
-//		System.out.println(res);
+// List<Survey> res = surveyService.getAllCreatedSurveys(usuario2);
+// System.out.println("====== Mostrando Surveys filtradas por usernameCreator======");
+// System.out.println(res);
 //
-//	}
+// }
 //
 //	@Test
-//	public void deleteTest() {
+// public void deleteTest(){
 //
-//		Survey s = new Survey();
-//		Collection<Question> questions = new LinkedList<>();
-//		Question q = new Question("Pregunta cualquiera");
-//		questions.add(q);
-//		String usuario1 = "Usuario1";
+// Survey s = new Survey();
+// Collection<Question> questions = new LinkedList<>();
+// Question q = new Question("Pregunta cualquiera");
+// questions.add(q);
+// String usuario1 = "Usuario1";
 //
-//		s.setCensus(2);
-//		s.setDescription("Prueba");
-//		s.setTitle("Titulo prueba");
-//		s.setCategory("Deportes");
-//		s.setStartDate(LocalDate.now());
-//		s.setEndDate(LocalDate.now());
-//		s.setQuestions(questions);
-//		s.setUsernameCreator(usuario1);
+// s.setCensus(2);
+// s.setDescription("Prueba");
+// s.setTitle("Titulo prueba");
+// s.setStartDate(new Date());
+// s.setEndDate(new Date());
+// s.setQuestions(questions);
+// s.setUsernameCreator(usuario1);
 //
-//		Survey s2 = new Survey();
-//		Collection<Question> questions2 = new LinkedList<>();
-//		Question q2 = new Question("Pregunta cualquiera2");
-//		questions2.add(q2);
-//		String usuario2 = "Usuario2";
+// Survey s2 = new Survey();
+// Collection<Question> questions2 = new LinkedList<>();
+// Question q2 = new Question("Pregunta cualquiera2");
+// questions2.add(q2);
+// String usuario2 = "Usuario2";
 //
-//		s2.setCensus(5);
-//		s2.setDescription("Prueba2");
-//		s2.setTitle("Titulo prueba2");
-//		s2.setCategory("Deportes");
-//		s2.setStartDate(LocalDate.now());
-//		s2.setEndDate(LocalDate.of(2016, 10, 15));
-//		s2.setQuestions(questions2);
-//		s2.setUsernameCreator(usuario2);
+// s2.setCensus(5);
+// s2.setDescription("Prueba2");
+// s2.setTitle("Titulo prueba2");
+// s2.setStartDate(new Date());
+// s2.setEndDate(Date.of(2020, 10, 15));
+// s2.setQuestions(questions2);
+// s.setUsernameCreator(usuario2);
 //
-//		Integer res = this.surveyService.save(s);
-//		surveyService.save(s2);
+// surveyService.save(s);
+// surveyService.save(s2);
 //
-//		System.out
-//				.println("====== Mostrando los surveysIDs despues de guardar ======");
-//		for (Survey a : surveyService.findAll()) {
-//			System.out.println(a.getId());
-//		}
+// System.out.println("====== Mostrando los surveysIDs despues de guardar======");
+// for(Survey a : surveyService.findAll()){
+// System.out.println(a.getId());
+// }
 //
-//		surveyService.delete(res);
+// surveyService.delete(17);
 //
-//		System.out
-//				.println("====== Mostrando los surveysIDs despues de borrar ======");
-//		for (Survey a : surveyService.findAll()) {
-//			System.out.println(a.getId());
-//		}
+// System.out.println("====== Mostrando los surveysIDs despues de borrar======");
+// for(Survey a : surveyService.findAll()){
+// System.out.println(a.getId());
+// }
 //
-//	}
+// }
 //
 //	@Test
 //	public void posibleTest() {
@@ -214,9 +201,8 @@
 //		s.setCensus(2);
 //		s.setDescription("Prueba");
 //		s.setTitle("Titulo prueba");
-//		s.setCategory("Deportes");
-//		s.setStartDate(LocalDate.now());
-//		s.setEndDate(LocalDate.now());
+//		s.setStartDate(new Date());
+//		s.setEndDate(new Date());
 //		s.setQuestions(questions);
 //		s.setUsernameCreator(usuario1);
 //
@@ -229,24 +215,21 @@
 //		s2.setCensus(null);
 //		s2.setDescription("Prueba2");
 //		s2.setTitle("Titulo prueba2");
-//		s2.setCategory("Deportes");
-//		s2.setStartDate(LocalDate.now());
-//		s2.setEndDate(LocalDate.of(2016, 10, 15));
+//		s2.setStartDate(new Date());
+//		s2.setEndDate();
 //		s2.setQuestions(questions2);
 //		s.setUsernameCreator(usuario2);
 //
-//		Integer res1 = this.surveyService.save(s);
-//		Integer res2 = this.surveyService.save(s2);
+//		surveyService.save(s);
+//		surveyService.save(s2);
 //
-//		System.out
-//				.println("====== Mostrando los surveys despues de guardar ======");
+//		System.out.println("====== Mostrando los surveys despues de guardar ======");
 //		for (Survey a : surveyService.findAll()) {
 //			System.out.println(a.getId());
 //		}
-//		System.out
-//				.println("====== Mostrando si es posible añadir censo ======");
-//		System.out.println(surveyService.posible(res1));
-//		System.out.println(surveyService.posible(res2));
+//		System.out.println("====== Mostrando si es posible añadir censo ======");
+//		System.out.println(surveyService.posible(9));
+//		System.out.println(surveyService.posible(11));
 //	}
 //
 //}
