@@ -1,6 +1,7 @@
 package domain;
 
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.Collection;
 import java.util.Date;
 import java.util.LinkedList;
@@ -84,26 +85,25 @@ public class Survey extends DomainEntity implements Serializable {
 		this.category = category;
 	}
 
-	@DateTimeFormat(pattern = "MM-dd-yyyy")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	public Date getStartDate() {
 		return startDate;
 	}
 
 	public void setStartDate(Date startDate) {
-		if (endDate != null) {
-			checkFecha(startDate, endDate);
+		if (startDate != null) {
+			checkFecha2(startDate);
 		}
 		this.startDate = startDate;
 	}
 
-	@DateTimeFormat(pattern = "MM-dd-yyyy")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	public Date getEndDate() {
 		return endDate;
 	}
 
 	public void setEndDate(Date endDate) {
-		if (startDate != null) {
-			checkFecha(startDate, endDate);
+		if (endDate != null) {
 		}
 		this.endDate = endDate;
 	}
@@ -160,6 +160,16 @@ public class Survey extends DomainEntity implements Serializable {
 
 		if (endDate.before(startDate)) {
 			throw new IllegalArgumentException("La fecha de fin no puede ir antes que la de inicio");
+		}
+
+	}
+	
+	private void checkFecha2(Date startDate) {
+
+		Date now = Date.from(Instant.now().minusSeconds(10));
+		
+		if (startDate.before(now)) {
+			throw new IllegalArgumentException("La fecha de inicio no puede ser anterior a la actual");
 		}
 
 	}

@@ -171,52 +171,52 @@ public class SurveyServiceTest extends AbstractTest {
 			throw new IllegalArgumentException(
 					 "Formato de fecha inválido o fecha no válida");
 		}
- Survey s = new Survey();
- Collection<Question> questions = new LinkedList<>();
- Question q = new Question("Pregunta cualquiera");
- questions.add(q);
- String usuario1 = "Usuario1";
+		Survey s = new Survey();
+		Collection<Question> questions = new LinkedList<>();
+		Question q = new Question("Pregunta cualquiera");
+		questions.add(q);
+		String usuario1 = "Usuario1";
 
- s.setCensus(2);
- s.setDescription("Prueba");
- s.setTitle("Titulo prueba");
- s.setCategory("Deportes");
- s.setStartDate(new Date());
- s.setEndDate(new Date());
- s.setQuestions(questions);
- s.setUsernameCreator(usuario1);
+		s.setCensus(2);
+		s.setDescription("Prueba");
+		s.setTitle("Titulo prueba");
+		s.setCategory("Deportes");
+		s.setStartDate(new Date());
+		s.setEndDate(new Date());
+		s.setQuestions(questions);
+		s.setUsernameCreator(usuario1);
 
- Survey s2 = new Survey();
- Collection<Question> questions2 = new LinkedList<>();
- Question q2 = new Question("Pregunta cualquiera2");
- questions2.add(q2);
- String usuario2 = "Usuario2";
+		Survey s2 = new Survey();
+		Collection<Question> questions2 = new LinkedList<>();
+		Question q2 = new Question("Pregunta cualquiera2");
+		questions2.add(q2);
+		String usuario2 = "Usuario2";
 
- s2.setCensus(5);
- s2.setDescription("Prueba2");
- s2.setTitle("Titulo prueba2");
- s2.setCategory("Deportes");
- s2.setStartDate(new Date());
- s2.setEndDate(fecha);
- s2.setQuestions(questions2);
- s.setUsernameCreator(usuario2);
+		s2.setCensus(5);
+		s2.setDescription("Prueba2");
+		s2.setTitle("Titulo prueba2");
+		s2.setCategory("Deportes");
+		s2.setStartDate(new Date());
+		s2.setEndDate(fecha);
+		s2.setQuestions(questions2);
+		s.setUsernameCreator(usuario2);
 
- surveyService.save(s);
- surveyService.save(s2);
+		Integer res1 = this.surveyService.save2(s);
+		Integer res2 = this.surveyService.save2(s2);
 
- System.out.println("====== Mostrando los surveysIDs despues de guardar======");
- for(Survey a : surveyService.findAll()){
- System.out.println(a.getId());
- }
+		System.out.println("====== Mostrando los surveysIDs despues de guardar======");
+		for (Survey a : surveyService.findAll()) {
+			System.out.println(a.getId());
+		}
 
- surveyService.delete(17);
+		surveyService.delete(res1);
 
- System.out.println("====== Mostrando los surveysIDs despues de borrar======");
- for(Survey a : surveyService.findAll()){
- System.out.println(a.getId());
- }
+		System.out.println("====== Mostrando los surveysIDs despues de borrar======");
+		for (Survey a : surveyService.findAll()) {
+			System.out.println(a.getId());
+		}
 
- }
+	}
 
 	@Test
 	public void posibleTest() {
@@ -259,16 +259,16 @@ public class SurveyServiceTest extends AbstractTest {
 		s2.setQuestions(questions2);
 		s.setUsernameCreator(usuario2);
 
-		surveyService.save(s);
-		surveyService.save(s2);
+		Integer res1 = this.surveyService.save2(s);
+		Integer res2 = this.surveyService.save2(s2);
 
 		System.out.println("====== Mostrando los surveys despues de guardar ======");
 		for (Survey a : surveyService.findAll()) {
 			System.out.println(a.getId());
 		}
 		System.out.println("====== Mostrando si es posible añadir censo ======");
-		System.out.println(surveyService.posible(9));
-		System.out.println(surveyService.posible(11));
+		System.out.println(surveyService.posible(res1));
+		System.out.println(surveyService.posible(res2));
 	}
 
 }

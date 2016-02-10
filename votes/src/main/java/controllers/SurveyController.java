@@ -107,7 +107,7 @@ public class SurveyController {
 				"http://localhost/auth/api/checkToken?token=" + token),
 				domain.CheckToken.class);
 		Assert.isTrue(isValid.getValid());
-		int i = surveyService.save(s);
+		int i = surveyService.save2(s);
 		Survey res = surveyService.findOne(i);
 		Authority a = new AuthorityImpl();
 		a.postKey(String.valueOf(res.getId()));

@@ -26,11 +26,18 @@ public class SurveyService {
 	@Autowired
 	private QuestionService questionService;
 	
-	@Transactional
-	public Integer save(Survey s){
+	
+	public Integer save2(Survey s){
 		Assert.notNull(s);
 		Survey s1 = surveyRepository.save(s);
 		return s1.getId();
+	}
+	
+	
+	public void save(Survey s){
+		Assert.notNull(s);
+		surveyRepository.save(s);
+	
 	}
 	
 	public Survey findOne(int id){
@@ -45,6 +52,11 @@ public class SurveyService {
 		Assert.notNull(res);
 		
 		return res;
+	}
+		
+	public void delete(int id){
+		Assert.notNull(id);
+		surveyRepository.delete(id);
 	}
 	//Método de interacción con el subsistema de Creacion de Censos
 	public void addCensus(Integer s, Integer c){
@@ -70,11 +82,7 @@ public class SurveyService {
 		List<Survey>res = surveyRepository.getAllCreatedSurveys(usernameCreator);
 		return res;
 	}
-	
-	public void delete(int id){
-		Assert.notNull(id);
-		surveyRepository.delete(id);
-	}
+
 	
 	public Boolean posible (int id) {
 		Assert.notNull(id);

@@ -10,8 +10,9 @@
 	<bean id="survey1" class="domain.Survey">
 		<property name="title" value="Survey1" />
 		<property name="description" value="Esta es la Survey1" />
-		<property name="startDate" value="01-01-2016" />
-		<property name="endDate" value="10-10-2016" />
+		<property name="category" value="Deportes" />
+		<property name="startDate" value="01/01/2017" />
+		<property name="endDate" value="10/10/2017" />
 		<property name="census" value="1" />
 		<property name="questions">
 			<list>
