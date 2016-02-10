@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 
 <html>
 <meta charset="UTF8">
@@ -63,7 +63,7 @@
 						</div>
 					<div id="select" class="form-group">	
 						<label>Fecha de finalizaci&oacute;n:</label>
-						<select onchange="actualiza_opcionFecha(this)">
+						<select onchange="actualiza_opciones(this)">
 						  <option value="no">No</option>
 						  <option value="si">Si</option>
 						</select>
@@ -83,10 +83,12 @@
 					<option value="otros">Otros</option>
 					</select>
 					</div>
-					<div class="form-group">	
-						<label>Tipo de votación:</label>
-						<label><input type="radio" id="texto" name="tipo" checked="" onclick="actualizar_opciones()">Texto</label>
-						<label><input type="radio" id="imagenes" name="tipo" onclick="actualizar_opciones()">Im&aacute;genes</label>
+					<div id="selectImagen" class="form-group">	
+						<label>Incluir imagen:</label>
+						<select onchange="actualiza_opcionFecha(this)">
+						  <option value="no">No</option>
+						  <option value="si">Si</option>
+						</select>
 					</div>
 					<div id="divTexto">
 						<div class="form-group">	

@@ -8,17 +8,13 @@ function ocultarTodo(){
 	addClass(imagenes,"hidden");
 	addClass(fechaFin,"hidden");
 }
-function actualizar_opciones(){
-	var texto = document.querySelectorAll("#divTexto")[0];
-	var imagenes = document.querySelectorAll("#divImagenes")[0];
-	if(document.querySelectorAll("#texto")[0].checked==true){
-		addClass(imagenes,"hidden");
-		removeClass(texto,"hidden");
-	}else if(document.querySelectorAll("#imagenes")[0].checked==true){
-		addClass(texto,"hidden");
-		removeClass(imagenes,"hidden");
+function actualizar_opciones(s){
+	var opcionImagen = document.querySelectorAll("#fechaFin")[0];
+	if(s.value=="si"){
+		removeClass(opcionImagen,"hidden");
+	}else{
+		addClass(opcionImagen,"hidden");
 	}
-	return false;
 }
 function actualiza_opcionFecha(s){
 	var fechaFin = document.querySelectorAll("#fechaFin")[0];
